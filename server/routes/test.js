@@ -1,9 +1,12 @@
 import mongoose from "mongoose";
-
 import { generateToken } from "../middleware/auth.js";
+import { connectDB } from "../config/database.js";
 
 export const handleTestConnection = async (req, res) => {
   try {
+    if (mongoose.connection.readyState !== 1) {
+      await connectDB();
+    }
     // Check MongoDB connection
     const mongoStatus = mongoose.connection.readyState;
     const statusText = {

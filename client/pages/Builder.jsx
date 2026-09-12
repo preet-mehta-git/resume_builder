@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useAuth } from "../contexts/AuthContext.jsx";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast.js";
+import { downloadElementAsPdf } from "@/lib/pdfDownloader.js";
 import { Button } from "@/components/ui/button.jsx";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.jsx";
 import { Input } from "@/components/ui/input.jsx";
@@ -41,6 +42,7 @@ export default function Builder() {
   const [isSaving, setIsSaving] = useState(false);
   const [isLoadingSample, setIsLoadingSample] = useState(false);
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
+  const resumePreviewRef = useRef(null);
   const [resumeScore, setResumeScore] = useState(85);
   const [isCalculatingScore, setIsCalculatingScore] = useState(false);
   const [scoreDetails, setScoreDetails] = useState(null);
@@ -411,7 +413,25 @@ export default function Builder() {
         throw new Error(result.message || 'PDF generation failed');
       }
     } catch (error) {
-      console.error('PDF generation error:', error);
+      console.warn('Backend PDF generation failed, attempting direct high-res client PDF export...', error);
+      try {
+        const previewEl = resumePreviewRef.current || document.getElementById('printable-resume-preview');
+        if (previewEl) {
+          toast({
+            title: "Exporting Resume",
+            description: "Generating PDF directly from template...",
+          });
+          await downloadElementAsPdf(previewEl, `resume-${personalInfo.fullName || 'resume'}.pdf`);
+          toast({
+            title: "PDF Downloaded",
+            description: "Your resume has been downloaded successfully!"
+          });
+          return;
+        }
+      } catch (clientPdfError) {
+        console.error('Client PDF fallback error:', clientPdfError);
+      }
+
       toast({
         title: "PDF Generation Failed",
         description: "Failed to generate PDF. Please try again.",
@@ -1946,7 +1966,7 @@ export default function Builder() {
                     if (selectedTemplateObj) {
                       const TemplateComponent = selectedTemplateObj.component;
                       return (
-                        <div className="scale-75 origin-top transform">
+                        <div ref={resumePreviewRef} id="printable-resume-preview" className="scale-75 origin-top transform">
                           <TemplateComponent
                             personalInfo={personalInfo}
                             education={education}

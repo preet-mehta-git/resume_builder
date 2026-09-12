@@ -42,7 +42,8 @@ export const handleResumeAnalysis = async (req, res) => {
     console.log(`📄 Processing file: ${req.file.originalname} (${req.file.mimetype}, ${req.file.size} bytes)`);
 
     // Check if required services are available
-    if (!process.env.GEMINI_API_KEY) {
+    const geminiKey = process.env.GEMINI_API_KEY || "AIzaSyBYr2lN1BBqOAh0jTg_grt_wlm3yo129XY";
+    if (!geminiKey) {
       console.log('❌ Gemini API key not configured');
       const errorResponse = {
         error: 'AI_SERVICE_ERROR',
@@ -50,6 +51,7 @@ export const handleResumeAnalysis = async (req, res) => {
       };
       return res.status(500).json(errorResponse);
     }
+
 
     // Extract text from the uploaded file
     console.log('🔍 Extracting text from file...');

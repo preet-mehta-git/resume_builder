@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext.jsx";
 import { useToast } from "@/hooks/use-toast.js";
+import { downloadElementAsPdf } from "@/lib/pdfDownloader.js";
 import { Button } from "@/components/ui/button.jsx";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.jsx";
 import { Badge } from "@/components/ui/badge.jsx";
@@ -221,24 +222,54 @@ export default function Dashboard() {
         throw new Error(`Server error: ${response.status} - ${errorText || 'Non-JSON response'}`);
       }
 
-      if (response.ok && result.success && result.filename) {
-        // Now download the generated PDF file
-        const downloadResponse = await fetch(`/api/pdf/download/${result.filename}`, {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
+      if (response.ok && result.success) {
+        if (result.filename) {
+          // Now download the generated PDF file
+          const downloadResponse = await fetch(`/api/pdf/download/${result.filename}`, {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
 
-        if (downloadResponse.ok) {
-          const blob = await downloadResponse.blob();
-          const url = window.URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = `${resume.title.replace(/\s+/g, '_')}.pdf`;
-          document.body.appendChild(a);
-          a.click();
-          window.URL.revokeObjectURL(url);
-          document.body.removeChild(a);
+          if (downloadResponse.ok) {
+            const blob = await downloadResponse.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${resume.title.replace(/\s+/g, '_')}.pdf`;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+
+            // Update download count
+            setResumes(resumes.map(r =>
+              r.id === resume.id
+                ? { ...r, downloads: r.downloads + 1 }
+                : r
+            ));
+
+            toast({
+              title: "✅ Download Successful",
+              description: `${resume.title} has been downloaded successfully!`,
+              duration: 3000
+            });
+            return;
+          } else {
+            throw new Error('Failed to download generated PDF');
+          }
+        }
+
+        // If server provided HTML content directly (e.g. serverless fallback)
+        if (result.html) {
+          const tempDiv = document.createElement('div');
+          tempDiv.style.position = 'absolute';
+          tempDiv.style.left = '-9999px';
+          tempDiv.innerHTML = result.html;
+          document.body.appendChild(tempDiv);
+
+          await downloadElementAsPdf(tempDiv, `${resume.title.replace(/\s+/g, '_')}.pdf`);
+          document.body.removeChild(tempDiv);
 
           // Update download count
           setResumes(resumes.map(r =>
@@ -252,9 +283,11 @@ export default function Dashboard() {
             description: `${resume.title} has been downloaded successfully!`,
             duration: 3000
           });
-        } else {
-          throw new Error('Failed to download generated PDF');
+          return;
         }
+
+        const errorMessage = result?.message || `HTTP ${response.status}: Failed to generate PDF`;
+        throw new Error(errorMessage);
       } else {
         // Handle error cases
         const errorMessage = result?.message || `HTTP ${response.status}: Failed to generate PDF`;

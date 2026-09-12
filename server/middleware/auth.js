@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
 import { User } from '../models/User.js';
+import { connectDB } from '../config/database.js';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 
@@ -18,12 +19,9 @@ export const authenticateToken = async (req, res, next) => {
 
     // Ensure MongoDB is connected
     if (mongoose.connection.readyState !== 1) {
-      console.error('MongoDB not connected during authentication. Connection state:', mongoose.connection.readyState);
-      return res.status(500).json({
-        success: false,
-        message: 'Database connection failed. Please try again later.'
-      });
+      await connectDB();
     }
+
 
     const decoded = jwt.verify(token, JWT_SECRET);
 

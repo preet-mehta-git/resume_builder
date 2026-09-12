@@ -71,21 +71,26 @@ export const handleGenerateCustomPDF = async (req, res) => {
     }
 
     // Generate PDF
+    const htmlContent = PDFGenerator.generateHTML(resumeDataToUse, finalTemplate);
     const result = await PDFGenerator.generatePDF(resumeDataToUse, finalTemplate);
 
     if (result.success) {
       return res.json({
         success: true,
         message: 'PDF generated successfully',
-        filename: result.filename
+        filename: result.filename,
+        html: htmlContent
       });
     } else {
-      return res.status(500).json({
-        success: false,
-        message: 'PDF generation failed',
-        error: result.error
+      // Return HTML as fallback so client can render PDF directly
+      return res.json({
+        success: true,
+        fallback: true,
+        html: htmlContent,
+        message: 'Generated resume content for client download'
       });
     }
+
 
   } catch (error) {
     console.error('PDF generation error:', error);

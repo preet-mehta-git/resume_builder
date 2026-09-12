@@ -1,8 +1,10 @@
 import { User } from "../models/User.js";
 import { Resume } from "../models/Resume.js";
+import { connectDB } from "../config/database.js";
 
 export const handleSeedDatabase = async (req, res) => {
   try {
+    await connectDB();
     // Check if data already exists
     const existingUser = await User.findOne({ email: 'demo@example.com' });
     if (existingUser) {

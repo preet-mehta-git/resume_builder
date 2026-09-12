@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { User } from "../models/User.js";
 import { generateToken } from "../middleware/auth.js";
+import { connectDB } from "../config/database.js";
 
 export const handleRegister = async (req, res) => {
   try {
@@ -19,12 +20,9 @@ export const handleRegister = async (req, res) => {
 
     // Ensure MongoDB is connected
     if (mongoose.connection.readyState !== 1) {
-      console.error('MongoDB not connected. Connection state:', mongoose.connection.readyState);
-      return res.status(500).json({
-        success: false,
-        message: 'Database connection failed. Please try again later.'
-      });
+      await connectDB();
     }
+
 
     console.log('Using MongoDB for registration');
 
@@ -113,12 +111,9 @@ export const handleLogin = async (req, res) => {
 
     // Ensure MongoDB is connected
     if (mongoose.connection.readyState !== 1) {
-      console.error('MongoDB not connected. Connection state:', mongoose.connection.readyState);
-      return res.status(500).json({
-        success: false,
-        message: 'Database connection failed. Please try again later.'
-      });
+      await connectDB();
     }
+
 
     console.log('Using MongoDB for login');
 

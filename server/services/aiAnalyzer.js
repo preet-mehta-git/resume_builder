@@ -4,7 +4,7 @@ export class AIAnalyzer {
   static genAI = null;
 
   static initialize() {
-    const apiKey = "AIzaSyBYr2lN1BBqOAh0jTg_grt_wlm3yo129XY";
+    const apiKey = process.env.GEMINI_API_KEY || "AIzaSyBYr2lN1BBqOAh0jTg_grt_wlm3yo129XY";
     if (!apiKey) {
       console.error('GEMINI_API_KEY not configured! Please set the API key in environment variables.');
       this.genAI = null;
