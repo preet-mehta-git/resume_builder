@@ -83,6 +83,13 @@
   html {
     overflow-x: hidden;
   }
+  input, textarea, select {
+    color: #FFFFFF !important;
+  }
+  input::placeholder, textarea::placeholder {
+    color: #9CA3AF !important;
+    opacity: 0.85 !important;
+  }
 }
 
 /* Typography */
