@@ -1,7 +1,9 @@
 import { Resume } from "../models/Resume.js";
+import { connectDB } from "../config/database.js";
 
 export const handleCreateResume = async (req, res) => {
   try {
+    await connectDB();
     const userId = req.user._id;
     const { title, template, status, data } = req.body;
 
@@ -51,6 +53,7 @@ export const handleCreateResume = async (req, res) => {
 
 export const handleGetResumes = async (req, res) => {
   try {
+    await connectDB();
     const userId = req.user._id;
     
     const resumes = await Resume.find({ userId }).sort({ updatedAt: -1 });
@@ -72,6 +75,7 @@ export const handleGetResumes = async (req, res) => {
 
 export const handleGetResume = async (req, res) => {
   try {
+    await connectDB();
     const userId = req.user._id;
     const { id } = req.params;
 
@@ -101,6 +105,7 @@ export const handleGetResume = async (req, res) => {
 
 export const handleUpdateResume = async (req, res) => {
   try {
+    await connectDB();
     const userId = req.user._id;
     const { id } = req.params;
     const { title, template, status, data } = req.body;
@@ -160,6 +165,7 @@ export const handleUpdateResume = async (req, res) => {
 
 export const handleDeleteResume = async (req, res) => {
   try {
+    await connectDB();
     const userId = req.user._id;
     const { id } = req.params;
 

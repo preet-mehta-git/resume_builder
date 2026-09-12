@@ -19,12 +19,17 @@ export const handleRegister = async (req, res) => {
     }
 
     // Ensure MongoDB is connected
-    if (mongoose.connection.readyState !== 1) {
-      await connectDB();
+    const dbConnected = await connectDB();
+    if (!dbConnected && mongoose.connection.readyState !== 1) {
+      console.error('Database connection failed in registration');
+      return res.status(500).json({
+        success: false,
+        message: 'Database connection failed. Please check MONGODB_URI.'
+      });
     }
 
-
     console.log('Using MongoDB for registration');
+
 
     // Check if user exists
     const existingUser = await User.findOne({
@@ -110,12 +115,17 @@ export const handleLogin = async (req, res) => {
     }
 
     // Ensure MongoDB is connected
-    if (mongoose.connection.readyState !== 1) {
-      await connectDB();
+    const dbConnected = await connectDB();
+    if (!dbConnected && mongoose.connection.readyState !== 1) {
+      console.error('Database connection failed in login');
+      return res.status(500).json({
+        success: false,
+        message: 'Database connection failed. Please check MONGODB_URI.'
+      });
     }
 
-
     console.log('Using MongoDB for login');
+
 
     // Find user in MongoDB
     const user = await User.findOne({ email });
