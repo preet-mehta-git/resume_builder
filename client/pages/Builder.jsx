@@ -382,40 +382,65 @@ export default function Builder() {
 
       const result = await response.json();
 
-      if (result.success && result.filename) {
-        // Download the generated PDF
-        const downloadResponse = await fetch(`/api/pdf/download/${result.filename}`, {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
+      if (result.success) {
+        if (result.filename && !result.fallback) {
+          // Download the generated PDF from server if available
+          const downloadResponse = await fetch(`/api/pdf/download/${result.filename}`, {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
 
-        if (downloadResponse.ok) {
-          const blob = await downloadResponse.blob();
-          const url = window.URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.style.display = 'none';
-          a.href = url;
-          a.download = `resume-${personalInfo.fullName || 'resume'}.pdf`;
-          document.body.appendChild(a);
-          a.click();
-          window.URL.revokeObjectURL(url);
-          document.body.removeChild(a);
+          if (downloadResponse.ok) {
+            const blob = await downloadResponse.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = `resume-${personalInfo.fullName || 'resume'}.pdf`;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+
+            toast({
+              title: "PDF Generated",
+              description: "Your resume has been downloaded successfully!"
+            });
+            return;
+          }
+        }
+
+        // If server provided HTML content directly (serverless Vercel fallback)
+        if (result.html) {
+          toast({
+            title: "Generating PDF",
+            description: "Creating PDF document...",
+          });
+
+          const tempDiv = document.createElement('div');
+          tempDiv.style.position = 'absolute';
+          tempDiv.style.left = '-9999px';
+          tempDiv.style.width = '8.5in';
+          tempDiv.innerHTML = result.html;
+          document.body.appendChild(tempDiv);
+
+          await downloadElementAsPdf(tempDiv, `resume-${personalInfo.fullName || 'resume'}.pdf`);
+          document.body.removeChild(tempDiv);
 
           toast({
-            title: "PDF Generated",
+            title: "PDF Downloaded",
             description: "Your resume has been downloaded successfully!"
           });
-        } else {
-          throw new Error('Failed to download PDF');
+          return;
         }
       } else {
         throw new Error(result.message || 'PDF generation failed');
       }
     } catch (error) {
-      console.warn('Backend PDF generation failed, attempting direct high-res client PDF export...', error);
+      console.warn('Backend PDF generation failed, attempting direct template export...', error);
       try {
-        const previewEl = resumePreviewRef.current || document.getElementById('printable-resume-preview');
+        const previewEl = document.getElementById('printable-resume-preview') || resumePreviewRef.current;
         if (previewEl) {
           toast({
             title: "Exporting Resume",
@@ -431,6 +456,7 @@ export default function Builder() {
       } catch (clientPdfError) {
         console.error('Client PDF fallback error:', clientPdfError);
       }
+
 
       toast({
         title: "PDF Generation Failed",
