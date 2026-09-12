@@ -10,7 +10,7 @@ import { Label } from "@/components/ui/label.jsx";
 import { Textarea } from "@/components/ui/textarea.jsx";
 // Simple select component - we'll use native select for now
 import { Badge } from "@/components/ui/badge.jsx";
-import { Plus, Minus, FileText, User, GraduationCap, Briefcase, Award, Languages, Download, Eye, Palette, BarChart3, MessageSquare, Shield, Folder, Sparkles, Save, LogOut, Home, RefreshCw } from "lucide-react";
+import { Plus, Minus, FileText, User, GraduationCap, Briefcase, Award, Languages, Download, Eye, Palette, BarChart3, MessageSquare, Shield, Folder, Sparkles, Save, LogOut, Home, RefreshCw, Building, Calendar, BookOpen, Code } from "lucide-react";
 
 // Import templates
 import TemplateModern from "@/components/templates/TemplateModern.jsx";
@@ -1046,9 +1046,10 @@ export default function Builder() {
   const renderEducationSection = () => (
     <div className="space-y-6">
       {education.map((edu, index) => (
-        <Card key={edu.id} className="border border-emerald-500/40 bg-gray-900/90 shadow-xl border-l-4 border-l-emerald-500">
+        <Card key={edu.id} className="border border-primary/30 bg-gray-900/80 shadow-xl border-l-4 border-l-primary rounded-xl">
           <CardHeader className="flex flex-row items-center justify-between pb-4">
-            <CardTitle className="text-lg font-bold text-emerald-400 font-heading">
+            <CardTitle className="text-lg font-bold text-primary font-heading flex items-center gap-2">
+              <GraduationCap className="w-5 h-5 text-primary" />
               Education {index + 1}
             </CardTitle>
             {education.length > 1 && (
@@ -1065,60 +1066,78 @@ export default function Builder() {
           <CardContent className="space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label className="text-sm font-semibold text-gray-300">Institution</Label>
+                <Label className="text-sm font-semibold text-gray-300 flex items-center gap-2">
+                  <Building className="w-4 h-4 text-primary" />
+                  Institution <span className="text-red-500">*</span>
+                </Label>
                 <Input
                   value={edu.institution}
                   onChange={(e) => updateEducation(edu.id, 'institution', e.target.value)}
                   placeholder="University of California"
-                  className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-emerald-500 focus:ring-emerald-500/20"
+                  className="h-12 bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-primary focus:ring-primary/20"
                 />
               </div>
               <div className="space-y-2">
-                <Label className="text-sm font-semibold text-gray-300">Degree</Label>
+                <Label className="text-sm font-semibold text-gray-300 flex items-center gap-2">
+                  <GraduationCap className="w-4 h-4 text-primary" />
+                  Degree <span className="text-red-500">*</span>
+                </Label>
                 <Input
                   value={edu.degree}
                   onChange={(e) => updateEducation(edu.id, 'degree', e.target.value)}
                   placeholder="Bachelor of Science"
-                  className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-emerald-500 focus:ring-emerald-500/20"
+                  className="h-12 bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-primary focus:ring-primary/20"
                 />
               </div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="space-y-2">
-                <Label className="text-sm font-semibold text-gray-300">Field of Study</Label>
+                <Label className="text-sm font-semibold text-gray-300 flex items-center gap-2">
+                  <BookOpen className="w-4 h-4 text-primary" />
+                  Field of Study
+                </Label>
                 <Input
                   value={edu.field}
                   onChange={(e) => updateEducation(edu.id, 'field', e.target.value)}
                   placeholder="Computer Science"
-                  className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-emerald-500 focus:ring-emerald-500/20"
+                  className="h-12 bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-primary focus:ring-primary/20"
                 />
               </div>
               <div className="space-y-2">
-                <Label className="text-sm font-semibold text-gray-300">Start Date</Label>
+                <Label className="text-sm font-semibold text-gray-300 flex items-center gap-2">
+                  <Calendar className="w-4 h-4 text-primary" />
+                  Start Date
+                </Label>
                 <Input
                   value={edu.startDate}
                   onChange={(e) => updateEducation(edu.id, 'startDate', e.target.value)}
                   placeholder="2020"
-                  className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-emerald-500 focus:ring-emerald-500/20"
+                  className="h-12 bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-primary focus:ring-primary/20"
                 />
               </div>
               <div className="space-y-2">
-                <Label className="text-sm font-semibold text-gray-300">End Date</Label>
+                <Label className="text-sm font-semibold text-gray-300 flex items-center gap-2">
+                  <Calendar className="w-4 h-4 text-primary" />
+                  End Date
+                </Label>
                 <Input
                   value={edu.endDate}
                   onChange={(e) => updateEducation(edu.id, 'endDate', e.target.value)}
                   placeholder="2024"
-                  className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-emerald-500 focus:ring-emerald-500/20"
+                  className="h-12 bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-primary focus:ring-primary/20"
                 />
               </div>
             </div>
             <div className="space-y-2">
-              <Label className="text-sm font-semibold text-gray-300">GPA (Optional)</Label>
+              <Label className="text-sm font-semibold text-gray-300 flex items-center gap-2">
+                <Award className="w-4 h-4 text-primary" />
+                GPA (Optional)
+              </Label>
               <Input
                 value={edu.gpa}
                 onChange={(e) => updateEducation(edu.id, 'gpa', e.target.value)}
                 placeholder="3.8"
-                className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-emerald-500 focus:ring-emerald-500/20 max-w-xs"
+                className="h-12 bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-primary focus:ring-primary/20 max-w-xs"
               />
             </div>
           </CardContent>
@@ -1127,7 +1146,7 @@ export default function Builder() {
       <Button
         onClick={addEducation}
         variant="outline"
-        className="w-full bg-emerald-500/10 hover:bg-emerald-500/20 border-emerald-500/40 text-emerald-400 hover:text-emerald-300 font-medium"
+        className="w-full bg-primary/10 hover:bg-primary/20 border-primary/40 text-primary hover:text-primary font-medium h-12"
       >
         <Plus className="w-4 h-4 mr-2" />
         Add Education
@@ -1138,9 +1157,10 @@ export default function Builder() {
   const renderExperienceSection = () => (
     <div className="space-y-6">
       {experience.map((exp, index) => (
-        <Card key={exp.id} className="border border-orange-500/40 bg-gray-900/90 shadow-xl border-l-4 border-l-orange-500">
+        <Card key={exp.id} className="border border-primary/30 bg-gray-900/80 shadow-xl border-l-4 border-l-primary rounded-xl">
           <CardHeader className="flex flex-row items-center justify-between pb-4">
-            <CardTitle className="text-lg font-bold text-orange-400 font-heading">
+            <CardTitle className="text-lg font-bold text-primary font-heading flex items-center gap-2">
+              <Briefcase className="w-5 h-5 text-primary" />
               Experience {index + 1}
             </CardTitle>
             {experience.length > 1 && (
@@ -1157,42 +1177,54 @@ export default function Builder() {
           <CardContent className="space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label className="text-sm font-semibold text-gray-300">Company</Label>
+                <Label className="text-sm font-semibold text-gray-300 flex items-center gap-2">
+                  <Building className="w-4 h-4 text-primary" />
+                  Company <span className="text-red-500">*</span>
+                </Label>
                 <Input
                   value={exp.company}
                   onChange={(e) => updateExperience(exp.id, 'company', e.target.value)}
                   placeholder="Google Inc."
-                  className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-orange-500 focus:ring-orange-500/20"
+                  className="h-12 bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-primary focus:ring-primary/20"
                 />
               </div>
               <div className="space-y-2">
-                <Label className="text-sm font-semibold text-gray-300">Position</Label>
+                <Label className="text-sm font-semibold text-gray-300 flex items-center gap-2">
+                  <Briefcase className="w-4 h-4 text-primary" />
+                  Position <span className="text-red-500">*</span>
+                </Label>
                 <Input
                   value={exp.position}
                   onChange={(e) => updateExperience(exp.id, 'position', e.target.value)}
                   placeholder="Software Engineer"
-                  className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-orange-500 focus:ring-orange-500/20"
+                  className="h-12 bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-primary focus:ring-primary/20"
                 />
               </div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 items-center">
               <div className="space-y-2">
-                <Label className="text-sm font-semibold text-gray-300">Start Date</Label>
+                <Label className="text-sm font-semibold text-gray-300 flex items-center gap-2">
+                  <Calendar className="w-4 h-4 text-primary" />
+                  Start Date
+                </Label>
                 <Input
                   value={exp.startDate}
                   onChange={(e) => updateExperience(exp.id, 'startDate', e.target.value)}
                   placeholder="Jan 2022"
-                  className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-orange-500 focus:ring-orange-500/20"
+                  className="h-12 bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-primary focus:ring-primary/20"
                 />
               </div>
               <div className="space-y-2">
-                <Label className="text-sm font-semibold text-gray-300">End Date</Label>
+                <Label className="text-sm font-semibold text-gray-300 flex items-center gap-2">
+                  <Calendar className="w-4 h-4 text-primary" />
+                  End Date
+                </Label>
                 <Input
                   value={exp.endDate}
                   onChange={(e) => updateExperience(exp.id, 'endDate', e.target.value)}
                   placeholder="Present"
                   disabled={exp.current}
-                  className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-orange-500 focus:ring-orange-500/20 disabled:opacity-50 disabled:bg-gray-900"
+                  className="h-12 bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-primary focus:ring-primary/20 disabled:opacity-50 disabled:bg-gray-900"
                 />
               </div>
               <div className="space-y-2 pt-2 sm:pt-6 flex items-center gap-2">
@@ -1201,18 +1233,21 @@ export default function Builder() {
                   id={`current-${exp.id}`}
                   checked={exp.current}
                   onChange={(e) => updateExperience(exp.id, 'current', e.target.checked)}
-                  className="w-5 h-5 accent-orange-500 rounded cursor-pointer"
+                  className="w-5 h-5 accent-primary rounded cursor-pointer"
                 />
                 <Label htmlFor={`current-${exp.id}`} className="text-sm font-semibold text-gray-300 cursor-pointer">Current Role</Label>
               </div>
             </div>
             <div className="space-y-2">
-              <Label className="text-sm font-semibold text-gray-300">Description</Label>
+              <Label className="text-sm font-semibold text-gray-300 flex items-center gap-2">
+                <MessageSquare className="w-4 h-4 text-primary" />
+                Description
+              </Label>
               <Textarea
                 value={exp.description}
                 onChange={(e) => updateExperience(exp.id, 'description', e.target.value)}
                 placeholder="• Developed scalable web applications using React and Node.js&#10;• Led a team of 3 developers in implementing new features&#10;• Improved application performance by 40%"
-                className="min-h-[100px] bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-orange-500 focus:ring-orange-500/20"
+                className="min-h-[100px] bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-primary focus:ring-primary/20"
                 rows={4}
               />
             </div>
@@ -1222,7 +1257,7 @@ export default function Builder() {
       <Button
         onClick={addExperience}
         variant="outline"
-        className="w-full bg-orange-500/10 hover:bg-orange-500/20 border-orange-500/40 text-orange-400 hover:text-orange-300 font-medium"
+        className="w-full bg-primary/10 hover:bg-primary/20 border-primary/40 text-primary hover:text-primary font-medium h-12"
       >
         <Plus className="w-4 h-4 mr-2" />
         Add Experience
@@ -1234,24 +1269,30 @@ export default function Builder() {
     <div className="space-y-6">
       <div className="grid gap-4">
         {skills.map((skill, index) => (
-          <Card key={skill.id} className="border border-cyan-500/40 bg-gray-900/90 shadow-xl border-l-4 border-l-cyan-500">
+          <Card key={skill.id} className="border border-primary/30 bg-gray-900/80 shadow-xl border-l-4 border-l-primary rounded-xl">
             <CardContent className="p-4">
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
                 <div className="flex-1 space-y-2">
-                  <Label className="text-sm font-semibold text-gray-300">Skill Name</Label>
+                  <Label className="text-sm font-semibold text-gray-300 flex items-center gap-2">
+                    <Award className="w-4 h-4 text-primary" />
+                    Skill Name
+                  </Label>
                   <Input
                     value={skill.name}
                     onChange={(e) => updateSkill(skill.id, 'name', e.target.value)}
                     placeholder="JavaScript"
-                    className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-cyan-500 focus:ring-cyan-500/20"
+                    className="h-12 bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-primary focus:ring-primary/20"
                   />
                 </div>
-                <div className="w-full sm:w-40 space-y-2">
-                  <Label className="text-sm font-semibold text-gray-300">Level</Label>
+                <div className="w-full sm:w-48 space-y-2">
+                  <Label className="text-sm font-semibold text-gray-300 flex items-center gap-2">
+                    <BarChart3 className="w-4 h-4 text-primary" />
+                    Level
+                  </Label>
                   <select
                     value={skill.level}
                     onChange={(e) => updateSkill(skill.id, 'level', e.target.value)}
-                    className="flex h-12 w-full items-center justify-between rounded-lg border border-gray-600 bg-gray-800 px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-400"
+                    className="flex h-12 w-full items-center justify-between rounded-md border border-gray-600 bg-gray-800 px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary"
                   >
                     <option value="Beginner">Beginner</option>
                     <option value="Intermediate">Intermediate</option>
@@ -1265,7 +1306,7 @@ export default function Builder() {
                       variant="outline"
                       size="sm"
                       onClick={() => removeSkill(skill.id)}
-                      className="text-red-400 border-red-500/40 bg-transparent hover:text-red-300 hover:bg-red-500/10"
+                      className="text-red-400 border-red-500/40 bg-transparent hover:text-red-300 hover:bg-red-500/10 h-10 px-3"
                     >
                       <Minus className="w-4 h-4 mr-1 sm:mr-0" />
                       <span className="sm:hidden text-xs">Remove</span>
@@ -1280,7 +1321,7 @@ export default function Builder() {
       <Button
         onClick={addSkill}
         variant="outline"
-        className="w-full bg-cyan-500/10 hover:bg-cyan-500/20 border-cyan-500/40 text-cyan-400 hover:text-cyan-300 font-medium"
+        className="w-full bg-primary/10 hover:bg-primary/20 border-primary/40 text-primary hover:text-primary font-medium h-12"
       >
         <Plus className="w-4 h-4 mr-2" />
         Add Skill
@@ -1291,9 +1332,10 @@ export default function Builder() {
   const renderCertificationsSection = () => (
     <div className="space-y-6">
       {certifications.map((cert, index) => (
-        <Card key={cert.id} className="border border-teal-500/40 bg-gray-900/90 shadow-xl border-l-4 border-l-teal-500">
+        <Card key={cert.id} className="border border-primary/30 bg-gray-900/80 shadow-xl border-l-4 border-l-primary rounded-xl">
           <CardHeader className="flex flex-row items-center justify-between pb-4">
-            <CardTitle className="text-lg font-bold text-teal-400 font-heading">
+            <CardTitle className="text-lg font-bold text-primary font-heading flex items-center gap-2">
+              <Award className="w-5 h-5 text-primary" />
               Certification {index + 1}
             </CardTitle>
             {certifications.length > 1 && (
@@ -1310,30 +1352,39 @@ export default function Builder() {
           <CardContent className="space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="space-y-2">
-                <Label className="text-sm font-semibold text-gray-300">Certification Name</Label>
+                <Label className="text-sm font-semibold text-gray-300 flex items-center gap-2">
+                  <Award className="w-4 h-4 text-primary" />
+                  Certification Name <span className="text-red-500">*</span>
+                </Label>
                 <Input
                   value={cert.name}
                   onChange={(e) => updateCertification(cert.id, 'name', e.target.value)}
                   placeholder="AWS Certified Solutions Architect"
-                  className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-teal-500 focus:ring-teal-500/20"
+                  className="h-12 bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-primary focus:ring-primary/20"
                 />
               </div>
               <div className="space-y-2">
-                <Label className="text-sm font-semibold text-gray-300">Issuing Organization</Label>
+                <Label className="text-sm font-semibold text-gray-300 flex items-center gap-2">
+                  <Building className="w-4 h-4 text-primary" />
+                  Issuing Organization
+                </Label>
                 <Input
                   value={cert.issuer}
                   onChange={(e) => updateCertification(cert.id, 'issuer', e.target.value)}
                   placeholder="Amazon Web Services"
-                  className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-teal-500 focus:ring-teal-500/20"
+                  className="h-12 bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-primary focus:ring-primary/20"
                 />
               </div>
               <div className="space-y-2">
-                <Label className="text-sm font-semibold text-gray-300">Date Obtained</Label>
+                <Label className="text-sm font-semibold text-gray-300 flex items-center gap-2">
+                  <Calendar className="w-4 h-4 text-primary" />
+                  Date Obtained
+                </Label>
                 <Input
                   value={cert.date}
                   onChange={(e) => updateCertification(cert.id, 'date', e.target.value)}
                   placeholder="2023"
-                  className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-teal-500 focus:ring-teal-500/20"
+                  className="h-12 bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-primary focus:ring-primary/20"
                 />
               </div>
             </div>
@@ -1343,7 +1394,7 @@ export default function Builder() {
       <Button
         onClick={addCertification}
         variant="outline"
-        className="w-full bg-teal-500/10 hover:bg-teal-500/20 border-teal-500/40 text-teal-400 hover:text-teal-300 font-medium"
+        className="w-full bg-primary/10 hover:bg-primary/20 border-primary/40 text-primary hover:text-primary font-medium h-12"
       >
         <Plus className="w-4 h-4 mr-2" />
         Add Certification
@@ -1354,9 +1405,10 @@ export default function Builder() {
   const renderProjectsSection = () => (
     <div className="space-y-6">
       {projects.map((project, index) => (
-        <Card key={project.id} className="border border-purple-500/40 bg-gray-900/90 shadow-xl border-l-4 border-l-purple-500">
+        <Card key={project.id} className="border border-primary/30 bg-gray-900/80 shadow-xl border-l-4 border-l-primary rounded-xl">
           <CardHeader className="flex flex-row items-center justify-between pb-4">
-            <CardTitle className="text-lg font-bold text-purple-400 font-heading">
+            <CardTitle className="text-lg font-bold text-primary font-heading flex items-center gap-2">
+              <Folder className="w-5 h-5 text-primary" />
               Project {index + 1}
             </CardTitle>
             {projects.length > 1 && (
@@ -1372,31 +1424,40 @@ export default function Builder() {
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label className="text-sm font-semibold text-gray-300">Project Name</Label>
+              <Label className="text-sm font-semibold text-gray-300 flex items-center gap-2">
+                <Folder className="w-4 h-4 text-primary" />
+                Project Name <span className="text-red-500">*</span>
+              </Label>
               <Input
                 value={project.name}
                 onChange={(e) => updateProject(project.id, 'name', e.target.value)}
                 placeholder="E-commerce Platform"
-                className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-purple-500 focus:ring-purple-500/20"
+                className="h-12 bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-primary focus:ring-primary/20"
               />
             </div>
             <div className="space-y-2">
-              <Label className="text-sm font-semibold text-gray-300">Description</Label>
+              <Label className="text-sm font-semibold text-gray-300 flex items-center gap-2">
+                <MessageSquare className="w-4 h-4 text-primary" />
+                Description
+              </Label>
               <Textarea
                 value={project.description}
                 onChange={(e) => updateProject(project.id, 'description', e.target.value)}
                 placeholder="Built a full-stack e-commerce platform with user authentication, payment processing, and real-time inventory management..."
-                className="min-h-[100px] bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-purple-500 focus:ring-purple-500/20"
+                className="min-h-[100px] bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-primary focus:ring-primary/20"
                 rows={4}
               />
             </div>
             <div className="space-y-2">
-              <Label className="text-sm font-semibold text-gray-300">Technologies Used</Label>
+              <Label className="text-sm font-semibold text-gray-300 flex items-center gap-2">
+                <Code className="w-4 h-4 text-primary" />
+                Technologies Used
+              </Label>
               <Input
                 value={Array.isArray(project.technologies) ? project.technologies.join(', ') : project.technologies}
                 onChange={(e) => updateProject(project.id, 'technologies', e.target.value.split(', ').filter(tech => tech.trim()))}
                 placeholder="React, Node.js, MongoDB, Express"
-                className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-purple-500 focus:ring-purple-500/20"
+                className="h-12 bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-primary focus:ring-primary/20"
               />
               <p className="text-xs text-gray-400">Separate technologies with commas</p>
             </div>
@@ -1406,7 +1467,7 @@ export default function Builder() {
       <Button
         onClick={addProject}
         variant="outline"
-        className="w-full bg-purple-500/10 hover:bg-purple-500/20 border-purple-500/40 text-purple-400 hover:text-purple-300 font-medium"
+        className="w-full bg-primary/10 hover:bg-primary/20 border-primary/40 text-primary hover:text-primary font-medium h-12"
       >
         <Plus className="w-4 h-4 mr-2" />
         Add Project
