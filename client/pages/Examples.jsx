@@ -133,21 +133,21 @@ export default function Examples() {
     <div className="min-h-screen bg-gradient-dark">
       {/* Header */}
       <header className="bg-black/90 backdrop-blur-lg border-b border-gray-700/60 sticky top-0 z-50">
-        <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center space-x-4">
+        <div className="container mx-auto px-4 sm:px-6 py-4 flex flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center space-x-3 sm:space-x-4 min-w-0">
             <Link to="/">
               <Button variant="ghost" size="sm" className="text-gray-300 hover:text-primary hover:bg-gray-800">
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Home
+                <ArrowLeft className="w-4 h-4 mr-1 sm:mr-2" />
+                <span className="hidden xs:inline">Back to </span>Home
               </Button>
             </Link>
-            <div className="w-10 h-10 bg-gradient-dark-gold rounded-xl flex items-center justify-center shadow-lg">
-              <FileText className="w-6 h-6 text-black" />
+            <div className="w-9 h-9 sm:w-10 sm:h-10 bg-gradient-dark-gold rounded-xl flex items-center justify-center shadow-lg flex-shrink-0">
+              <FileText className="w-5 h-5 sm:w-6 sm:h-6 text-black" />
             </div>
-            <h1 className="text-2xl font-bold text-primary font-heading">Resume Examples</h1>
+            <h1 className="text-xl sm:text-2xl font-bold text-primary font-heading truncate">Resume Examples</h1>
           </div>
           <Link to="/builder">
-            <Button className="bg-gradient-dark-gold text-black hover:opacity-90 shadow-lg">
+            <Button className="bg-gradient-dark-gold text-black hover:opacity-90 shadow-lg text-sm sm:text-base">
               Start Building
             </Button>
           </Link>

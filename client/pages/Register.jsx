@@ -106,7 +106,7 @@ const Register = () => {
                 </div>
               )}
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <label htmlFor="firstName" className="text-sm font-semibold text-gray-700 flex items-center gap-2">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -121,7 +121,7 @@ const Register = () => {
                     value={formData.firstName}
                     onChange={handleChange}
                     placeholder="John"
-                    className="h-11 border-gray-200 focus:border-green-500 focus:ring-green-500/20"
+                    className="h-11 bg-white text-gray-900 border-gray-300 placeholder:text-gray-400 focus:bg-white focus:text-gray-900 focus:border-green-500 focus:ring-green-500/20"
                     required
                   />
                 </div>
@@ -136,7 +136,7 @@ const Register = () => {
                     value={formData.lastName}
                     onChange={handleChange}
                     placeholder="Doe"
-                    className="h-11 border-gray-200 focus:border-green-500 focus:ring-green-500/20"
+                    className="h-11 bg-white text-gray-900 border-gray-300 placeholder:text-gray-400 focus:bg-white focus:text-gray-900 focus:border-green-500 focus:ring-green-500/20"
                     required
                   />
                 </div>
@@ -156,7 +156,7 @@ const Register = () => {
                   value={formData.username}
                   onChange={handleChange}
                   placeholder="johndoe"
-                  className="h-11 border-gray-200 focus:border-green-500 focus:ring-green-500/20"
+                  className="h-11 bg-white text-gray-900 border-gray-300 placeholder:text-gray-400 focus:bg-white focus:text-gray-900 focus:border-green-500 focus:ring-green-500/20"
                   required
                 />
               </div>
@@ -175,7 +175,7 @@ const Register = () => {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="john@example.com"
-                  className="h-11 border-gray-200 focus:border-green-500 focus:ring-green-500/20"
+                  className="h-11 bg-white text-gray-900 border-gray-300 placeholder:text-gray-400 focus:bg-white focus:text-gray-900 focus:border-green-500 focus:ring-green-500/20"
                   required
                 />
               </div>
@@ -194,7 +194,7 @@ const Register = () => {
                   value={formData.password}
                   onChange={handleChange}
                   placeholder="Create a strong password (min 6 characters)"
-                  className="h-11 border-gray-200 focus:border-green-500 focus:ring-green-500/20"
+                  className="h-11 bg-white text-gray-900 border-gray-300 placeholder:text-gray-400 focus:bg-white focus:text-gray-900 focus:border-green-500 focus:ring-green-500/20"
                   required
                 />
               </div>

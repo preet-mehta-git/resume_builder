@@ -359,34 +359,34 @@ export default function Dashboard() {
       {/* Enhanced Dark Header */}
       <header className="bg-black/90 backdrop-blur-lg border-b border-gray-700/60 sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <Link to="/" className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-gradient-dark-gold rounded-xl flex items-center justify-center shadow-lg">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div className="flex items-center space-x-3 sm:space-x-4 min-w-0">
+              <Link to="/" className="flex items-center space-x-3 min-w-0">
+                <div className="w-10 h-10 bg-gradient-dark-gold rounded-xl flex items-center justify-center shadow-lg flex-shrink-0">
                   <FileText className="w-5 h-5 text-black" />
                 </div>
-                <div>
-                  <span className="text-xl font-bold text-primary font-heading">
+                <div className="min-w-0">
+                  <span className="text-xl font-bold text-primary font-heading truncate block">
                     CareerCraft
                   </span>
                   <div className="flex items-center gap-1">
-                    <Sparkles className="w-3 h-3 text-primary" />
+                    <Sparkles className="w-3 h-3 text-primary flex-shrink-0" />
                     <span className="text-xs text-primary font-medium">Pro</span>
                   </div>
                 </div>
               </Link>
             </div>
             
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2 sm:space-x-4 flex-wrap gap-2">
               <Button variant="outline" size="sm" className="bg-black/50 hover:bg-gray-800 border-gray-600 text-gray-300 hover:text-primary">
                 <Settings className="w-4 h-4 mr-2" />
                 Settings
               </Button>
-              <div className="flex items-center space-x-3 bg-black/50 rounded-full px-3 py-2 border border-gray-600">
-                <div className="w-8 h-8 bg-gradient-dark-gold rounded-full flex items-center justify-center">
+              <div className="flex items-center space-x-2 sm:space-x-3 bg-black/50 rounded-full px-3 py-1.5 sm:py-2 border border-gray-600 max-w-xs truncate">
+                <div className="w-7 h-7 sm:w-8 sm:h-8 bg-gradient-dark-gold rounded-full flex items-center justify-center flex-shrink-0">
                   <User className="w-4 h-4 text-black" />
                 </div>
-                <span className="text-sm font-medium text-gray-300">{user?.firstName} {user?.lastName}</span>
+                <span className="text-xs sm:text-sm font-medium text-gray-300 truncate">{user?.firstName} {user?.lastName}</span>
               </div>
               <Button variant="ghost" size="sm" onClick={logout} className="text-gray-300 hover:text-red-400 hover:bg-red-500/10">
                 <LogOut className="w-4 h-4" />
@@ -396,10 +396,10 @@ export default function Dashboard() {
         </div>
       </header>
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 max-w-full">
         <div className="grid lg:grid-cols-4 gap-8">
           {/* Enhanced Sidebar */}
-          <div className="lg:col-span-1 space-y-6">
+          <div className="lg:col-span-1 space-y-6 min-w-0">
             {/* Enhanced User Info Card */}
             <Card key="user-info-card" className="solid-dark-card shadow-xl">
               <CardHeader className="text-center pb-6">
@@ -487,14 +487,14 @@ export default function Dashboard() {
           </div>
 
           {/* Enhanced Main Content */}
-          <div className="lg:col-span-3 space-y-6">
+          <div className="lg:col-span-3 space-y-6 min-w-0">
             {/* Enhanced Header Section */}
             <div key="header-section" className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-              <div>
-                <h1 className="text-4xl font-bold bg-gradient-to-r from-gray-900 via-purple-900 to-blue-900 bg-clip-text text-transparent">
+              <div className="min-w-0">
+                <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-gray-100 via-primary to-accent bg-clip-text text-transparent truncate">
                   My Resumes
                 </h1>
-                <p className="text-gray-600 mt-2">Manage and track your resume collection with AI insights</p>
+                <p className="text-gray-400 mt-2 text-sm sm:text-base">Manage and track your resume collection with AI insights</p>
               </div>
               <Link to="/builder">
                 <Button size="lg" className="bg-gradient-dark-gold text-black hover:opacity-90 shadow-lg hover:shadow-xl transition-all duration-200">

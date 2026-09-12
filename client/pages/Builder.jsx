@@ -935,7 +935,7 @@ export default function Builder() {
 
   const renderPersonalSection = () => (
     <div className="space-y-8">
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-2">
           <Label htmlFor="fullName" className="text-sm font-semibold text-gray-300 flex items-center gap-2">
             <User className="w-4 h-4 text-primary" />
@@ -946,7 +946,7 @@ export default function Builder() {
             value={personalInfo.fullName}
             onChange={(e) => setPersonalInfo({...personalInfo, fullName: e.target.value})}
             placeholder="John Doe"
-            className="h-12 bg-gray-800 border-gray-600 text-white focus:border-primary focus:ring-primary/20"
+            className="h-12 bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-primary focus:ring-primary/20"
             required
           />
         </div>
@@ -961,12 +961,12 @@ export default function Builder() {
             value={personalInfo.email}
             onChange={(e) => setPersonalInfo({...personalInfo, email: e.target.value})}
             placeholder="john@example.com"
-            className="h-12 bg-gray-800 border-gray-600 text-white focus:border-primary focus:ring-primary/20"
+            className="h-12 bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-primary focus:ring-primary/20"
             required
           />
         </div>
       </div>
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-2">
           <Label htmlFor="phone" className="text-sm font-semibold text-gray-300">
             Phone
@@ -976,7 +976,7 @@ export default function Builder() {
             value={personalInfo.phone}
             onChange={(e) => setPersonalInfo({...personalInfo, phone: e.target.value})}
             placeholder="+1 (555) 123-4567"
-            className="h-12 bg-gray-800 border-gray-600 text-white focus:border-primary focus:ring-primary/20"
+            className="h-12 bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-primary focus:ring-primary/20"
           />
         </div>
         <div className="space-y-2">
@@ -988,11 +988,11 @@ export default function Builder() {
             value={personalInfo.address}
             onChange={(e) => setPersonalInfo({...personalInfo, address: e.target.value})}
             placeholder="City, State, Country"
-            className="h-12 bg-gray-800 border-gray-600 text-white focus:border-primary focus:ring-primary/20"
+            className="h-12 bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-primary focus:ring-primary/20"
           />
         </div>
       </div>
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-2">
           <Label htmlFor="linkedin" className="text-sm font-semibold text-gray-300">
             LinkedIn
@@ -1002,7 +1002,7 @@ export default function Builder() {
             value={personalInfo.linkedin}
             onChange={(e) => setPersonalInfo({...personalInfo, linkedin: e.target.value})}
             placeholder="linkedin.com/in/johndoe"
-            className="h-12 bg-gray-800 border-gray-600 text-white focus:border-primary focus:ring-primary/20"
+            className="h-12 bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-primary focus:ring-primary/20"
           />
         </div>
         <div className="space-y-2">
@@ -1014,7 +1014,7 @@ export default function Builder() {
             value={personalInfo.website}
             onChange={(e) => setPersonalInfo({...personalInfo, website: e.target.value})}
             placeholder="johndoe.com"
-            className="h-12 bg-gray-800 border-gray-600 text-white focus:border-primary focus:ring-primary/20"
+            className="h-12 bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-primary focus:ring-primary/20"
           />
         </div>
       </div>
@@ -1033,7 +1033,7 @@ export default function Builder() {
           value={summary}
           onChange={(e) => setSummary(e.target.value)}
           placeholder="Write a compelling summary that highlights your key achievements, skills, and career goals..."
-          className="min-h-[120px] bg-gray-800 border-gray-600 text-white focus:border-primary focus:ring-primary/20"
+          className="min-h-[120px] bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:bg-gray-800 focus:text-white focus:border-primary focus:ring-primary/20"
           rows={6}
         />
         <p className="text-sm text-gray-400">
@@ -1063,14 +1063,14 @@ export default function Builder() {
             )}
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label className="text-sm font-semibold text-gray-700">Institution</Label>
                 <Input
                   value={edu.institution}
                   onChange={(e) => updateEducation(edu.id, 'institution', e.target.value)}
                   placeholder="University of California"
-                  className="bg-gradient-to-r from-gray-50 to-slate-50 border-gray-200"
+                  className="bg-white text-gray-900 border-gray-300 placeholder:text-gray-400 focus:bg-white focus:text-gray-900 focus:border-emerald-500 focus:ring-emerald-500/20"
                 />
               </div>
               <div className="space-y-2">
@@ -1079,18 +1079,18 @@ export default function Builder() {
                   value={edu.degree}
                   onChange={(e) => updateEducation(edu.id, 'degree', e.target.value)}
                   placeholder="Bachelor of Science"
-                  className="bg-gradient-to-r from-gray-50 to-slate-50 border-gray-200"
+                  className="bg-white text-gray-900 border-gray-300 placeholder:text-gray-400 focus:bg-white focus:text-gray-900 focus:border-emerald-500 focus:ring-emerald-500/20"
                 />
               </div>
             </div>
-            <div className="grid md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="space-y-2">
                 <Label className="text-sm font-semibold text-gray-700">Field of Study</Label>
                 <Input
                   value={edu.field}
                   onChange={(e) => updateEducation(edu.id, 'field', e.target.value)}
                   placeholder="Computer Science"
-                  className="bg-gradient-to-r from-gray-50 to-slate-50 border-gray-200"
+                  className="bg-white text-gray-900 border-gray-300 placeholder:text-gray-400 focus:bg-white focus:text-gray-900 focus:border-emerald-500 focus:ring-emerald-500/20"
                 />
               </div>
               <div className="space-y-2">
@@ -1099,7 +1099,7 @@ export default function Builder() {
                   value={edu.startDate}
                   onChange={(e) => updateEducation(edu.id, 'startDate', e.target.value)}
                   placeholder="2020"
-                  className="bg-gradient-to-r from-gray-50 to-slate-50 border-gray-200"
+                  className="bg-white text-gray-900 border-gray-300 placeholder:text-gray-400 focus:bg-white focus:text-gray-900 focus:border-emerald-500 focus:ring-emerald-500/20"
                 />
               </div>
               <div className="space-y-2">
@@ -1108,7 +1108,7 @@ export default function Builder() {
                   value={edu.endDate}
                   onChange={(e) => updateEducation(edu.id, 'endDate', e.target.value)}
                   placeholder="2024"
-                  className="bg-gradient-to-r from-gray-50 to-slate-50 border-gray-200"
+                  className="bg-white text-gray-900 border-gray-300 placeholder:text-gray-400 focus:bg-white focus:text-gray-900 focus:border-emerald-500 focus:ring-emerald-500/20"
                 />
               </div>
             </div>
@@ -1118,7 +1118,7 @@ export default function Builder() {
                 value={edu.gpa}
                 onChange={(e) => updateEducation(edu.id, 'gpa', e.target.value)}
                 placeholder="3.8"
-                className="bg-gradient-to-r from-gray-50 to-slate-50 border-gray-200 max-w-32"
+                className="bg-white text-gray-900 border-gray-300 placeholder:text-gray-400 focus:bg-white focus:text-gray-900 focus:border-emerald-500 focus:ring-emerald-500/20 max-w-xs"
               />
             </div>
           </CardContent>
@@ -1155,14 +1155,14 @@ export default function Builder() {
             )}
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label className="text-sm font-semibold text-gray-700">Company</Label>
                 <Input
                   value={exp.company}
                   onChange={(e) => updateExperience(exp.id, 'company', e.target.value)}
                   placeholder="Google Inc."
-                  className="bg-gradient-to-r from-gray-50 to-slate-50 border-gray-200"
+                  className="bg-white text-gray-900 border-gray-300 placeholder:text-gray-400 focus:bg-white focus:text-gray-900 focus:border-orange-500 focus:ring-orange-500/20"
                 />
               </div>
               <div className="space-y-2">
@@ -1171,18 +1171,18 @@ export default function Builder() {
                   value={exp.position}
                   onChange={(e) => updateExperience(exp.id, 'position', e.target.value)}
                   placeholder="Software Engineer"
-                  className="bg-gradient-to-r from-gray-50 to-slate-50 border-gray-200"
+                  className="bg-white text-gray-900 border-gray-300 placeholder:text-gray-400 focus:bg-white focus:text-gray-900 focus:border-orange-500 focus:ring-orange-500/20"
                 />
               </div>
             </div>
-            <div className="grid md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 items-center">
               <div className="space-y-2">
                 <Label className="text-sm font-semibold text-gray-700">Start Date</Label>
                 <Input
                   value={exp.startDate}
                   onChange={(e) => updateExperience(exp.id, 'startDate', e.target.value)}
                   placeholder="Jan 2022"
-                  className="bg-gradient-to-r from-gray-50 to-slate-50 border-gray-200"
+                  className="bg-white text-gray-900 border-gray-300 placeholder:text-gray-400 focus:bg-white focus:text-gray-900 focus:border-orange-500 focus:ring-orange-500/20"
                 />
               </div>
               <div className="space-y-2">
@@ -1192,17 +1192,18 @@ export default function Builder() {
                   onChange={(e) => updateExperience(exp.id, 'endDate', e.target.value)}
                   placeholder="Present"
                   disabled={exp.current}
-                  className="bg-gradient-to-r from-gray-50 to-slate-50 border-gray-200"
+                  className="bg-white text-gray-900 border-gray-300 placeholder:text-gray-400 focus:bg-white focus:text-gray-900 focus:border-orange-500 focus:ring-orange-500/20 disabled:bg-gray-100 disabled:text-gray-500"
                 />
               </div>
-              <div className="space-y-2">
-                <Label className="text-sm font-semibold text-gray-700">Current Role</Label>
+              <div className="space-y-2 pt-2 sm:pt-6 flex items-center gap-2">
                 <input
                   type="checkbox"
+                  id={`current-${exp.id}`}
                   checked={exp.current}
                   onChange={(e) => updateExperience(exp.id, 'current', e.target.checked)}
-                  className="w-5 h-5 text-orange-600 rounded"
+                  className="w-5 h-5 text-orange-600 rounded cursor-pointer"
                 />
+                <Label htmlFor={`current-${exp.id}`} className="text-sm font-semibold text-gray-700 cursor-pointer">Current Role</Label>
               </div>
             </div>
             <div className="space-y-2">
@@ -1211,7 +1212,7 @@ export default function Builder() {
                 value={exp.description}
                 onChange={(e) => updateExperience(exp.id, 'description', e.target.value)}
                 placeholder="• Developed scalable web applications using React and Node.js&#10;• Led a team of 3 developers in implementing new features&#10;• Improved application performance by 40%"
-                className="min-h-[100px] bg-gradient-to-r from-gray-50 to-slate-50 border-gray-200"
+                className="min-h-[100px] bg-white text-gray-900 border-gray-300 placeholder:text-gray-400 focus:bg-white focus:text-gray-900 focus:border-orange-500 focus:ring-orange-500/20"
                 rows={4}
               />
             </div>
@@ -1235,22 +1236,22 @@ export default function Builder() {
         {skills.map((skill, index) => (
           <Card key={skill.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm border-l-4 border-l-cyan-500">
             <CardContent className="p-4">
-              <div className="flex items-center gap-4">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
                 <div className="flex-1 space-y-2">
                   <Label className="text-sm font-semibold text-gray-700">Skill Name</Label>
                   <Input
                     value={skill.name}
                     onChange={(e) => updateSkill(skill.id, 'name', e.target.value)}
                     placeholder="JavaScript"
-                    className="bg-gradient-to-r from-gray-50 to-slate-50 border-gray-200"
+                    className="bg-white text-gray-900 border-gray-300 placeholder:text-gray-400 focus:bg-white focus:text-gray-900 focus:border-cyan-500 focus:ring-cyan-500/20"
                   />
                 </div>
-                <div className="w-40 space-y-2">
+                <div className="w-full sm:w-40 space-y-2">
                   <Label className="text-sm font-semibold text-gray-700">Level</Label>
                   <select
                     value={skill.level}
                     onChange={(e) => updateSkill(skill.id, 'level', e.target.value)}
-                    className="flex h-10 w-full items-center justify-between rounded-md border border-gray-200 bg-gradient-to-r from-gray-50 to-slate-50 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-400"
+                    className="flex h-10 w-full items-center justify-between rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-400"
                   >
                     <option value="Beginner">Beginner</option>
                     <option value="Intermediate">Intermediate</option>
@@ -1259,14 +1260,17 @@ export default function Builder() {
                   </select>
                 </div>
                 {skills.length > 1 && (
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => removeSkill(skill.id)}
-                    className="text-red-600 hover:text-red-700 hover:bg-red-50"
-                  >
-                    <Minus className="w-4 h-4" />
-                  </Button>
+                  <div className="sm:self-end pb-1">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => removeSkill(skill.id)}
+                      className="text-red-600 hover:text-red-700 hover:bg-red-50 border-red-200"
+                    >
+                      <Minus className="w-4 h-4 mr-1 sm:mr-0" />
+                      <span className="sm:hidden text-xs">Remove</span>
+                    </Button>
+                  </div>
                 )}
               </div>
             </CardContent>
@@ -1304,14 +1308,14 @@ export default function Builder() {
             )}
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="grid md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="space-y-2">
                 <Label className="text-sm font-semibold text-gray-700">Certification Name</Label>
                 <Input
                   value={cert.name}
                   onChange={(e) => updateCertification(cert.id, 'name', e.target.value)}
                   placeholder="AWS Certified Solutions Architect"
-                  className="bg-gradient-to-r from-gray-50 to-slate-50 border-gray-200"
+                  className="bg-white text-gray-900 border-gray-300 placeholder:text-gray-400 focus:bg-white focus:text-gray-900 focus:border-teal-500 focus:ring-teal-500/20"
                 />
               </div>
               <div className="space-y-2">
@@ -1320,7 +1324,7 @@ export default function Builder() {
                   value={cert.issuer}
                   onChange={(e) => updateCertification(cert.id, 'issuer', e.target.value)}
                   placeholder="Amazon Web Services"
-                  className="bg-gradient-to-r from-gray-50 to-slate-50 border-gray-200"
+                  className="bg-white text-gray-900 border-gray-300 placeholder:text-gray-400 focus:bg-white focus:text-gray-900 focus:border-teal-500 focus:ring-teal-500/20"
                 />
               </div>
               <div className="space-y-2">
@@ -1329,7 +1333,7 @@ export default function Builder() {
                   value={cert.date}
                   onChange={(e) => updateCertification(cert.id, 'date', e.target.value)}
                   placeholder="2023"
-                  className="bg-gradient-to-r from-gray-50 to-slate-50 border-gray-200"
+                  className="bg-white text-gray-900 border-gray-300 placeholder:text-gray-400 focus:bg-white focus:text-gray-900 focus:border-teal-500 focus:ring-teal-500/20"
                 />
               </div>
             </div>
@@ -1373,7 +1377,7 @@ export default function Builder() {
                 value={project.name}
                 onChange={(e) => updateProject(project.id, 'name', e.target.value)}
                 placeholder="E-commerce Platform"
-                className="bg-gradient-to-r from-gray-50 to-slate-50 border-gray-200"
+                className="bg-white text-gray-900 border-gray-300 placeholder:text-gray-400 focus:bg-white focus:text-gray-900 focus:border-violet-500 focus:ring-violet-500/20"
               />
             </div>
             <div className="space-y-2">
@@ -1382,7 +1386,7 @@ export default function Builder() {
                 value={project.description}
                 onChange={(e) => updateProject(project.id, 'description', e.target.value)}
                 placeholder="Built a full-stack e-commerce platform with user authentication, payment processing, and real-time inventory management..."
-                className="min-h-[100px] bg-gradient-to-r from-gray-50 to-slate-50 border-gray-200"
+                className="min-h-[100px] bg-white text-gray-900 border-gray-300 placeholder:text-gray-400 focus:bg-white focus:text-gray-900 focus:border-violet-500 focus:ring-violet-500/20"
                 rows={4}
               />
             </div>
@@ -1392,7 +1396,7 @@ export default function Builder() {
                 value={Array.isArray(project.technologies) ? project.technologies.join(', ') : project.technologies}
                 onChange={(e) => updateProject(project.id, 'technologies', e.target.value.split(', ').filter(tech => tech.trim()))}
                 placeholder="React, Node.js, MongoDB, Express"
-                className="bg-gradient-to-r from-gray-50 to-slate-50 border-gray-200"
+                className="bg-white text-gray-900 border-gray-300 placeholder:text-gray-400 focus:bg-white focus:text-gray-900 focus:border-violet-500 focus:ring-violet-500/20"
               />
               <p className="text-xs text-gray-500">Separate technologies with commas</p>
             </div>
@@ -1621,22 +1625,22 @@ export default function Builder() {
 
       {/* Enhanced Dark Header */}
       <header className="bg-black/90 backdrop-blur-lg border-b border-gray-700/60 sticky top-0 z-50">
-        <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <div className="w-12 h-12 bg-gradient-dark-gold rounded-xl flex items-center justify-center shadow-xl">
-              <FileText className="w-7 h-7 text-black" />
+        <div className="container mx-auto px-4 sm:px-6 py-4 flex flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center space-x-3 sm:space-x-4 min-w-0">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-dark-gold rounded-xl flex items-center justify-center shadow-xl flex-shrink-0">
+              <FileText className="w-6 h-6 sm:w-7 sm:h-7 text-black" />
             </div>
-            <div>
-              <h1 className="text-2xl font-bold text-primary font-heading">
+            <div className="min-w-0">
+              <h1 className="text-xl sm:text-2xl font-bold text-primary font-heading truncate">
                 CareerCraft Builder
               </h1>
               <div className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-primary" />
-                <p className="text-sm text-primary font-medium">AI-Powered Design</p>
+                <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary flex-shrink-0" />
+                <p className="text-xs sm:text-sm text-primary font-medium truncate">AI-Powered Design</p>
               </div>
             </div>
           </div>
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-2 sm:space-x-4 flex-wrap gap-2">
             <Button
               variant="outline"
               size="sm"
@@ -1659,10 +1663,10 @@ export default function Builder() {
         </div>
       </header>
 
-      <div className="container mx-auto px-6 py-8 relative z-10">
-        <div className={`grid gap-8 ${sidePreview ? 'lg:grid-cols-6' : 'lg:grid-cols-4'}`}>
+      <div className="container mx-auto px-4 sm:px-6 py-8 relative z-10 max-w-full">
+        <div className={`grid gap-6 lg:gap-8 ${sidePreview ? 'lg:grid-cols-6' : 'lg:grid-cols-4'}`}>
           {/* Enhanced Sidebar */}
-          <div className={`${sidePreview ? 'lg:col-span-1' : 'lg:col-span-1'} space-y-6`}>
+          <div className={`${sidePreview ? 'lg:col-span-1' : 'lg:col-span-1'} space-y-6 min-w-0`}>
             {/* Navigation */}
             <Card className="solid-dark-card shadow-2xl">
               <CardHeader>
@@ -1866,12 +1870,12 @@ export default function Builder() {
           </div>
 
           {/* Enhanced Main Content */}
-          <div className={`${sidePreview ? 'lg:col-span-3' : 'lg:col-span-3'}`}>
+          <div className={`${sidePreview ? 'lg:col-span-3' : 'lg:col-span-3'} min-w-0`}>
             <Card className="solid-dark-card shadow-2xl">
               <CardHeader className="pb-6">
-                <div className="flex items-center justify-between">
+                <div className="flex flex-wrap items-center justify-between gap-2">
                   <div>
-                    <CardTitle className="text-2xl font-bold text-white font-heading">
+                    <CardTitle className="text-xl sm:text-2xl font-bold text-white font-heading">
                       {sections.find(s => s.id === activeSection)?.label || 'Resume Builder'}
                     </CardTitle>
                     <CardDescription className="text-gray-300 mt-2">
@@ -1892,19 +1896,19 @@ export default function Builder() {
 
           {/* Side Preview Panel */}
           {sidePreview && (
-            <div className="lg:col-span-2 hidden lg:block">
+            <div className="lg:col-span-2 hidden lg:block min-w-0 overflow-hidden">
               <Card className="solid-dark-card shadow-2xl sticky top-24 max-h-[calc(100vh-8rem)] overflow-hidden">
                 <CardHeader className="pb-4 border-b border-gray-700">
-                  <div className="flex items-center justify-between">
-                    <CardTitle className="text-lg flex items-center gap-2">
-                      <Eye className="w-5 h-5 text-blue-600" />
+                  <div className="flex items-center justify-between gap-2">
+                    <CardTitle className="text-lg flex items-center gap-2 text-white">
+                      <Eye className="w-5 h-5 text-primary" />
                       Live Preview
                     </CardTitle>
                     <div className="flex items-center gap-2">
                       <select
                         value={selectedTemplate}
                         onChange={(e) => setSelectedTemplate(e.target.value)}
-                        className="px-2 py-1 border border-gray-300 rounded text-xs"
+                        className="px-2 py-1 border border-gray-600 rounded text-xs bg-gray-800 text-white focus:outline-none focus:ring-1 focus:ring-primary"
                       >
                         {templates.map((template) => (
                           <option key={template.id} value={template.id}>
@@ -1916,7 +1920,7 @@ export default function Builder() {
                         variant="outline"
                         size="sm"
                         onClick={() => setSidePreview(false)}
-                        className="text-gray-500 hover:text-gray-700"
+                        className="text-gray-400 hover:text-white border-gray-600 bg-transparent h-7 w-7 p-0"
                       >
                         ✕
                       </Button>
@@ -1924,7 +1928,7 @@ export default function Builder() {
                   </div>
                 </CardHeader>
                 <CardContent className="p-4 overflow-auto max-h-[calc(100vh-12rem)]">
-                  <div className="bg-gray-50 rounded-lg p-2">
+                  <div className="bg-gray-100 rounded-lg p-2 overflow-hidden max-w-full">
                     {(() => {
                       const selectedTemplateObj = templates.find(t => t.id === selectedTemplate);
                       if (selectedTemplateObj) {

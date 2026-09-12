@@ -186,31 +186,31 @@ const AIAnalysis = () => {
 
       {/* Enhanced Dark Header */}
       <header className="bg-black/90 backdrop-blur-lg border-b border-gray-700/60 sticky top-0 z-50">
-        <div className="container mx-auto px-6 py-4 flex items-center justify-between">
+        <div className="container mx-auto px-4 sm:px-6 py-4 flex flex-wrap items-center justify-between gap-4">
           <div
-            className="flex items-center space-x-4 cursor-pointer hover:opacity-80 transition-opacity duration-200"
+            className="flex items-center space-x-3 sm:space-x-4 cursor-pointer hover:opacity-80 transition-opacity duration-200 min-w-0"
             onClick={() => navigate('/')}
             title="Back to Home"
           >
-            <div className="w-12 h-12 bg-gradient-dark-gold rounded-xl flex items-center justify-center shadow-xl">
-              <Brain className="w-7 h-7 text-black" />
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-dark-gold rounded-xl flex items-center justify-center shadow-xl flex-shrink-0">
+              <Brain className="w-6 h-6 sm:w-7 sm:h-7 text-black" />
             </div>
-            <div>
-              <h1 className="text-2xl font-bold text-primary font-heading">
+            <div className="min-w-0">
+              <h1 className="text-xl sm:text-2xl font-bold text-primary font-heading truncate">
                 CareerCraft AI Analyzer
               </h1>
               <div className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-primary" />
-                <p className="text-sm text-primary font-medium">Powered by Google Gemini 2.5 Flash</p>
+                <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary flex-shrink-0" />
+                <p className="text-xs sm:text-sm text-primary font-medium truncate">Powered by Google Gemini 2.5 Flash</p>
               </div>
             </div>
           </div>
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-3 bg-black/50 rounded-full px-4 py-2 border border-gray-600">
-              <div className="w-8 h-8 bg-gradient-dark-gold rounded-full flex items-center justify-center">
+          <div className="flex items-center space-x-2 sm:space-x-4 flex-wrap gap-2">
+            <div className="flex items-center space-x-2 sm:space-x-3 bg-black/50 rounded-full px-3 py-1.5 sm:py-2 border border-gray-600 max-w-xs truncate">
+              <div className="w-7 h-7 sm:w-8 sm:h-8 bg-gradient-dark-gold rounded-full flex items-center justify-center flex-shrink-0">
                 <span className="text-xs font-bold text-black">{user.firstName[0]}</span>
               </div>
-              <span className="text-sm font-medium text-gray-300">
+              <span className="text-xs sm:text-sm font-medium text-gray-300 truncate">
                 Welcome, <span className="text-primary">{user.firstName}</span>
               </span>
             </div>
@@ -227,7 +227,7 @@ const AIAnalysis = () => {
         </div>
       </header>
 
-      <div className="container mx-auto px-6 py-8 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 py-8 relative z-10 max-w-full">
         {!analysisResult ? (
           /* Enhanced Upload Section */
           <div className="max-w-4xl mx-auto">
