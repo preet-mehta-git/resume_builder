@@ -16,36 +16,41 @@ export const AuthProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Check for stored token on app load
+    // Check for stored session on app load (via cookie or localStorage token)
     const storedToken = localStorage.getItem('auth_token');
     if (storedToken) {
       setToken(storedToken);
-      fetchUserProfile(storedToken);
-    } else {
-      setIsLoading(false);
     }
+    // Always attempt to fetch user profile using cookie and/or stored token
+    fetchUserProfile(storedToken);
   }, []);
 
   const fetchUserProfile = async (authToken) => {
     try {
+      const headers = {};
+      if (authToken) {
+        headers['Authorization'] = `Bearer ${authToken}`;
+      }
+
       const response = await fetch('/api/auth/profile', {
-        headers: {
-          'Authorization': `Bearer ${authToken}`
-        }
+        headers,
+        credentials: 'include'
       });
 
       if (response.ok) {
         const data = await response.json();
         setUser(data.data.user);
       } else {
-        // Token is invalid
+        // Token or cookie is invalid/expired
         localStorage.removeItem('auth_token');
         setToken(null);
+        setUser(null);
       }
     } catch (error) {
       console.error('Failed to fetch user profile:', error);
       localStorage.removeItem('auth_token');
       setToken(null);
+      setUser(null);
     } finally {
       setIsLoading(false);
     }
@@ -58,6 +63,7 @@ export const AuthProvider = ({ children }) => {
         headers: {
           'Content-Type': 'application/json'
         },
+        credentials: 'include',
         body: JSON.stringify({ email, password })
       });
 
@@ -93,6 +99,7 @@ export const AuthProvider = ({ children }) => {
         headers: {
           'Content-Type': 'application/json'
         },
+        credentials: 'include',
         body: JSON.stringify(userData)
       });
 
@@ -122,10 +129,19 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const logout = () => {
-    setUser(null);
-    setToken(null);
-    localStorage.removeItem('auth_token');
+  const logout = async () => {
+    try {
+      await fetch('/api/auth/logout', {
+        method: 'POST',
+        credentials: 'include'
+      });
+    } catch (err) {
+      console.error('Logout error:', err);
+    } finally {
+      setUser(null);
+      setToken(null);
+      localStorage.removeItem('auth_token');
+    }
   };
 
   const value = {

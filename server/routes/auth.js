@@ -58,6 +58,14 @@ export const handleRegister = async (req, res) => {
     // Generate token
     const token = generateToken(user._id.toString());
 
+    // Set HTTP-only cookie with 30-day expiration
+    res.cookie('auth_token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: 30 * 24 * 60 * 60 * 1000 // 30 days
+    });
+
     res.status(201).json({
       success: true,
       message: 'User registered successfully',
@@ -150,6 +158,14 @@ export const handleLogin = async (req, res) => {
     // Generate token
     const token = generateToken(user._id.toString());
 
+    // Set HTTP-only cookie with 30-day expiration
+    res.cookie('auth_token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: 30 * 24 * 60 * 60 * 1000 // 30 days
+    });
+
     res.json({
       success: true,
       message: 'Login successful',
@@ -170,6 +186,28 @@ export const handleLogin = async (req, res) => {
     res.status(500).json({
       success: false,
       message: 'Login failed',
+      error: error instanceof Error ? error.message : 'Unknown error'
+    });
+  }
+};
+
+export const handleLogout = async (req, res) => {
+  try {
+    res.clearCookie('auth_token', {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax'
+    });
+
+    res.json({
+      success: true,
+      message: 'Logged out successfully'
+    });
+  } catch (error) {
+    console.error('Logout error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Logout failed',
       error: error instanceof Error ? error.message : 'Unknown error'
     });
   }

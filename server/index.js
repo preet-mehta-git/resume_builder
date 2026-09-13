@@ -1,11 +1,12 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import { connectDB } from "./config/database.js";
 import { handleDemo } from "./routes/demo.js";
 import { handleResumeAnalysis, uploadMiddleware } from "./routes/resumeAnalysis.js";
 import { handleGenerateCustomPDF, handleDownloadPDF, handleCleanupPDFs } from "./routes/pdf.js";
-import { handleRegister, handleLogin, handleGetProfile } from "./routes/auth.js";
+import { handleRegister, handleLogin, handleLogout, handleGetProfile } from "./routes/auth.js";
 import { handleCreateResume, handleGetResumes, handleGetResume, handleUpdateResume, handleDeleteResume } from "./routes/resume.js";
 import { handleSeedDatabase } from "./routes/seed.js";
 import { handleTestConnection } from "./routes/test.js";
@@ -31,7 +32,11 @@ export function createServer() {
   PDFGenerator.ensureOutputDir().catch(console.error);
 
   // Middleware
-  app.use(cors());
+  app.use(cors({
+    origin: true,
+    credentials: true
+  }));
+  app.use(cookieParser());
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
@@ -52,6 +57,7 @@ export function createServer() {
   // Authentication routes
   app.post("/api/auth/register", handleRegister);
   app.post("/api/auth/login", handleLogin);
+  app.post("/api/auth/logout", handleLogout);
   app.get("/api/auth/profile", authenticateToken, handleGetProfile);
 
   // Resume management routes (protected)

@@ -8,7 +8,12 @@ const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 export const authenticateToken = async (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;
-    const token = authHeader && authHeader.split(' ')[1]; // Bearer TOKEN
+    let token = authHeader && authHeader.split(' ')[1]; // Bearer TOKEN
+
+    // If token is not in Authorization header, check cookies
+    if (!token && req.cookies) {
+      token = req.cookies.auth_token;
+    }
 
     if (!token) {
       return res.status(401).json({
@@ -47,5 +52,5 @@ export const authenticateToken = async (req, res, next) => {
 };
 
 export const generateToken = (userId) => {
-  return jwt.sign({ userId }, JWT_SECRET, { expiresIn: '7d' });
+  return jwt.sign({ userId }, JWT_SECRET, { expiresIn: '30d' });
 };
